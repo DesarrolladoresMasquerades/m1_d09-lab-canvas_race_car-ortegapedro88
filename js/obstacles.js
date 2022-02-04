@@ -1,26 +1,28 @@
-class Obstacles {
-  constructor(ctx) {
-    this.ctx = ctx;
-    this.y = 0;
-    this.x = 0;
-    this.vy = 0;
+class Obstacle extends Component {
+  constructor(game) {
+      super(game);
+      this.game = game;
+      this.x = Math.floor(Math.random() * 440 + 30);
+      this.y = 150;
+      this.width = 100;
+      this.height = 150;
+      this.img = new Image();
   }
 
-  move(frameNumber) {
-    this.y += this.vy + 1
-  }
-
-  draw(frameNumber) {
-
-    for (let i = 0; i < 990; i++) {
-      
-        this.ctx.fillRect(
-        obsArray[i].x,
-        this.y-i*500,
-        obsArray[i].width,
-        obsArray[i].height
+  draw() {
+      this.img.src = "./images/red-car.png";
+      this.game.ctx.drawImage(
+          this.img,
+          this.x,
+          this.y,
+          this.width,
+          this.height
       );
-      
-     }
+  }
+
+  move() {
+      if (Math.floor(Math.random() * 20) % 3 === 0) {
+          this.y += 5;
+      }
   }
 }
